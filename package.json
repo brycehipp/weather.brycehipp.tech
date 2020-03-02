@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel index.html"
+    "dev": "parcel src/index.html"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "tailwindcss": "^1.2.0"
+    "tailwindcss": "^1.2.0",
+    "weather-underground-icons": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

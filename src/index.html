@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Weather</title>
+
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <div class="bg-gray-500 h-screen w-screen flex justify-center">
+      <div class="flex p-6 bg-white rounded-lg shadow-xl self-center">
+        <div id="loader">
+          Getting current weather...
+        </div>
+
+        <div id="weather" class="hidden">
+          <h2 class="text-5xl">
+            It's <span id="currentTemp"></span> in <span id="location"></span>
+          </h2>
+          <p class="text-gray-600">Feels like <span id="feelTemp"></span></p>
+          <p class="flex justify-center">
+            <i id="weatherIcon" class="wu wu-black wu-256"></i>
+          </p>
+        </div>
+
+        <div id="error" class="hidden"></div>
+      </div>
+    </div>
+
+    <script src="./index.js" charset="utf-8"></script>
+  </body>
+</html>
