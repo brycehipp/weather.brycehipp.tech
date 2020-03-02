@@ -1,6 +1,6 @@
 # Current Weather
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/40d9984c-3c23-4f9f-999d-9f5416101403/deploy-status)](https://app.netlify.com/sites/sad-swanson-f72f49/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/40d9984c-3c23-4f9f-999d-9f5416101403/deploy-status)](https://app.netlify.com/sites/brycehipp-weather/deploys)
 
 Shows the weather at your current location.
 
