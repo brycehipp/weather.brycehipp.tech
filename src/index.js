@@ -1,24 +1,28 @@
 import 'babel-polyfill'
 import 'weather-underground-icons'
 
+const loaderEl = document.getElementById('loader')
+const weatherEl = document.getElementById('weather')
+const errorEl = document.getElementById('error')
+
 function renderWeather({ city, temp, feelsLike, weatherClass }) {
   document.getElementById('currentTemp').innerHTML = temp
   document.getElementById('feelTemp').innerHTML = feelsLike
   document.getElementById('location').innerHTML = city
   document.getElementById('weatherIcon').classList.add(weatherClass)
 
-  document.getElementById('loader').classList.toggle('hidden')
-  document.getElementById('weather').classList.toggle('hidden')
+  loaderEl.classList.add('hidden')
+  weatherEl.classList.remove('hidden')
 }
 
 function renderError({ denied = false, unavailable = false }) {
-  const errorDiv = document.getElementById('error')
-  errorDiv.innerHTML = denied
+  errorEl.innerHTML = denied
     ? 'Please allow access to your location to see the current weather.'
     : 'Unable to get location'
 
-  document.getElementById('loader').classList.toggle('hidden')
-  errorDiv.classList.toggle('hidden')
+  loaderEl.classList.add('hidden')
+  weatherEl.classList.add('hidden')
+  errorEl.classList.toggle('hidden')
 }
 
 function getFormattedTemp(temp) {
@@ -52,7 +56,30 @@ function getWeatherClass(weatherCode) {
   }
 }
 
-async function getWeather(lat, lon) {
+function getPosition(options) {
+  return new Promise(function(resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject, options)
+  })
+}
+
+async function getWeather() {
+  let location
+
+  loaderEl.classList.remove('hidden')
+  weatherEl.classList.add('hidden')
+  errorEl.classList.add('hidden')
+
+  try {
+    location = await getPosition()
+  } catch (err) {
+    renderError({
+      denied: err.code === err.PERMISSION_DENIED,
+      unavailable: err.code === err.POSITION_UNAVAILABLE,
+    })
+    return
+  }
+
+  const { latitude: lat, longitude: lon } = location.coords
   const data = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9324ab40d302ad0be1d43a4c95172b69`,
   ).then(res => res.json())
@@ -69,15 +96,6 @@ async function getWeather(lat, lon) {
   })
 }
 
-navigator.geolocation.getCurrentPosition(
-  location => {
-    const { latitude, longitude } = location.coords
-    getWeather(latitude, longitude)
-  },
-  err => {
-    renderError({
-      denied: err.code === err.PERMISSION_DENIED,
-      unavailable: err.code === err.POSITION_UNAVAILABLE,
-    })
-  },
-)
+document.getElementById('refreshWeather').addEventListener('click', getWeather)
+
+getWeather()
