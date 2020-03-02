@@ -4,7 +4,7 @@
 
 Shows the weather at your current location.
 
-This project was created a simple way to try out [Parcel](https://parceljs.org/), [Tailwind](https://tailwindcss.com), and the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API).
+This project was created a way to try out [Parcel](https://parceljs.org/), [Tailwind](https://tailwindcss.com), and the [Geolocation API](https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API).
 
 ## Running the Project
 
@@ -18,6 +18,12 @@ Start in dev mode
 
 ```shell
 npm run dev
+```
+
+Test out the production build
+
+```shell
+npm run serve
 ```
 
 Build for production
