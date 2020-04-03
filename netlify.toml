@@ -1,0 +1,8 @@
+# Global build settings
+[build]
+   # run the build from this directory
+   base    = ""
+   # the output diretory to push to the CDN after the build
+   publish = "dist"
+   # the command to build our site
+   command = "npm run build"
